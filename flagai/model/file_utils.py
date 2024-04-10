@@ -19,7 +19,7 @@ def download_from_url(url, size=0, rank=0, to_path=None, file_pname=None):
     resume_download: download from last chunk
     """
     try:
-        requests.get(url, stream=True, verify=True)
+        requests.get(url, stream=True, verify=False)
     except Exception:
         raise ValueError('please check the download file names')
     total_size = size
@@ -41,7 +41,7 @@ def download_from_url(url, size=0, rank=0, to_path=None, file_pname=None):
         if resume_size == total_size:
             return
         headers = {'Range': 'bytes=%d-' % resume_size}
-        res = requests.get(url, stream=True, verify=True, headers=headers)
+        res = requests.get(url, stream=True, verify=False, headers=headers)
         progress = tqdm(
             unit="B",
             unit_scale=True,
@@ -66,7 +66,7 @@ def download_from_url(url, size=0, rank=0, to_path=None, file_pname=None):
                 headers = {'Range': 'bytes=%d-' % resume_size}
                 res = requests.get(url,
                                    stream=True,
-                                   verify=True,
+                                   verify=False,
                                    headers=headers)
     else:
         while not os.path.exists(
