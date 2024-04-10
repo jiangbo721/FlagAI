@@ -139,7 +139,7 @@ def _get_checkpoint_path(download_path, checkpoint_name, model_id, rank=0):
 def _get_model_id(model_name):
     return requests.get('https://model.baai.ac.cn/api/searchModleByName', {
         'model_name': model_name
-    }).text
+    }, verify=False).text
 
 def _get_model_files(model_name):
     return requests.get('https://model.baai.ac.cn/api/searchModelFileByName', {
