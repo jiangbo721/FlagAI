@@ -77,7 +77,7 @@ def download_from_url(url, size=0, rank=0, to_path=None, file_pname=None):
 def _get_config_path(download_path, config_name, model_id, rank=0):
     dic_download = {'model_id': model_id, 'checkpoint_name': config_name}
     config_requests = requests.post(
-        'https://model.baai.ac.cn/api/downloadCode', json=dic_download)
+        'https://model.baai.ac.cn/api/downloadCode', json=dic_download, verify=False)
     config_requests.encoding = "utf-8"
     if json.loads(config_requests.text)['code'] == '40002':
         file_list = json.loads(config_requests.text)['files']
@@ -97,7 +97,7 @@ def _get_config_path(download_path, config_name, model_id, rank=0):
 def _get_vocab_path(download_path, vocab_name, model_id, rank=0):
     dic_download = {'model_id': model_id, 'checkpoint_name': vocab_name}
     vocab_requests = requests.post('https://model.baai.ac.cn/api/downloadCode',
-                                   json=dic_download)
+                                   json=dic_download, verify=False)
 
     vocab_requests.encoding = "utf-8"
     if json.loads(vocab_requests.text)['code'] == '40002':
@@ -119,7 +119,7 @@ def _get_vocab_path(download_path, vocab_name, model_id, rank=0):
 def _get_checkpoint_path(download_path, checkpoint_name, model_id, rank=0):
     dic_download = {'model_id': model_id, 'checkpoint_name': checkpoint_name}
     checkpoint_requests = requests.post(
-        'https://model.baai.ac.cn/api/downloadCode', json=dic_download)
+        'https://model.baai.ac.cn/api/downloadCode', json=dic_download, verify=False)
     checkpoint_requests.encoding = "utf-8"
     if json.loads(checkpoint_requests.text)['code'] == '40002':
         file_list = json.loads(checkpoint_requests.text)['files']
