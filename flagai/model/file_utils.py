@@ -144,5 +144,5 @@ def _get_model_id(model_name):
 def _get_model_files(model_name):
     return requests.get('https://model.baai.ac.cn/api/searchModelFileByName', {
         'model_name': model_name
-    }).text
+    }, verify=False).text
 
